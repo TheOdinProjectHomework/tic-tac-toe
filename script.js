@@ -1,4 +1,6 @@
 let gameboardDiv = document.getElementById("gameboard");
+let winnerMsg = document.getElementById("winner-ad");
+let tryAgainBtn = document.getElementById("tryAgainBtn");
 
 let playerX = "X";
 let playerO = "O";
@@ -11,6 +13,9 @@ const winner = [
     [6,7,8],
     [0,4,8],
     [2,4,6],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8]
 ];
 
 console.log(winner[4]);
@@ -31,7 +36,7 @@ const gameEssentials = (function() {
                     cell.innerText = selectCell(i, currentPlayer);
                     if (checkWinner(currentPlayer, cells)){
                         console.log("Winner: " + currentPlayer);
-                        cell.removeEventListener("click");
+                        winnerMsg.textContent = "Winner: " + currentPlayer;
                     };
                     if(currentPlayer === playerX ? currentPlayer = playerO : currentPlayer = playerX);
                 } else {
@@ -55,15 +60,23 @@ const gameEssentials = (function() {
     const startGame = (player1, player2) => {
         displayBoard(player1, player2);
     };
+    const tryAgain = () => {
+        gameboardDiv.innerText = "";
+        winnerMsg.innerText = "";
+        displayBoard();
+    }
 
-    return { displayBoard, startGame, checkWinner };
+    return { displayBoard, startGame, checkWinner, tryAgain };
 })();
 
     const selectCell = (i, currentPlayer) => {
         let sign = currentPlayer;
-        // firstTurn = !firstTurn;
         return sign;
     }
+
+tryAgainBtn.addEventListener('click', () => {
+    gameEssentials.tryAgain();
+});
 
 gameEssentials.startGame(playerX, playerO);
 
