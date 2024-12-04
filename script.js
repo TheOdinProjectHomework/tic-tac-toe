@@ -1,9 +1,19 @@
 let gameboardDiv = document.getElementById("gameboard");
 let winnerMsg = document.getElementById("winner-ad");
 let tryAgainBtn = document.getElementById("tryAgainBtn");
+let turnMsg = document.getElementById("turn-paragraph");
 
-let playerX = "X";
-let playerO = "O";
+// let playerX = "X";
+let playerX = {
+    sign: "X",
+    score: 0
+}
+
+// let playerO = "O";
+let playerO = {
+    sign: "O",
+    score: 0
+}
 // let firstTurn = true;
 let currentPlayer = playerX;
 
@@ -31,14 +41,18 @@ const gameEssentials = (function() {
             cell.innerText = "";
             board.appendChild(cell);
             let cells = document.getElementsByClassName("cell");
+            turnMsg.innerText = "Player's turn: " + currentPlayer.sign;
             cell.addEventListener("click", () => {
                 if(cell.innerText === "") {
                     cell.innerText = selectCell(i, currentPlayer);
                     if (checkWinner(currentPlayer, cells)){
                         console.log("Winner: " + currentPlayer);
-                        winnerMsg.textContent = "Winner: " + currentPlayer;
-                    };
-                    if(currentPlayer === playerX ? currentPlayer = playerO : currentPlayer = playerX);
+                        // winnerMsg.textContent = "Winner: " + currentPlayer.sign;
+                        turnMsg.innerText = "Winner: " + currentPlayer.sign;
+                    } else {
+                        if(currentPlayer === playerX ? currentPlayer = playerO : currentPlayer = playerX);
+                        turnMsg.innerText = "Player's turn: " + currentPlayer.sign;
+                    }
                 } else {
                     return;
                 }
@@ -49,10 +63,10 @@ const gameEssentials = (function() {
     const checkWinner = (currentPlayer, cells) => {
         for(let i = 0; i < winner.length; i++) {
             const [a,b,c] = winner[i];
-            if(cells[a].innerText === currentPlayer && 
-                cells[b].innerText === currentPlayer && 
-                cells[c].innerText === currentPlayer) {
-                console.log("win: ", currentPlayer);
+            if(cells[a].innerText === currentPlayer.sign && 
+                cells[b].innerText === currentPlayer.sign && 
+                cells[c].innerText === currentPlayer.sign) {
+                console.log("win: ", currentPlayer.sign);
                 return true;
             }
         }
@@ -70,7 +84,7 @@ const gameEssentials = (function() {
 })();
 
     const selectCell = (i, currentPlayer) => {
-        let sign = currentPlayer;
+        let sign = currentPlayer.sign;
         return sign;
     }
 

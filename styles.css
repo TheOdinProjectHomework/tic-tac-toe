@@ -4,20 +4,57 @@
     box-sizing: border-box;
 }
 
+body {
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+}
+
 #gameboard {
     border: 1px solid red;
     display: flex;
     justify-content: center;
+    padding: 1rem;
 }
 
 .board {
     border: 1px solid blue;
+    border-radius: 1rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    background-color: #0A5EB0;
+    padding: .2rem;
 }
 
 .cell {
     height: 100px;
     width: 100px;
-    border: 1px solid lightgray;
+    background-color: aliceblue;
+    padding: 1rem;
+    border: .2rem solid #0A5EB0;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+/* header */
+header {
+    padding: 1rem;
+}
+
+
+/* score-div */
+.score-div {
+    background-color: lightgray;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: .5rem;
+}
+
+/* turn-board */
+.turn-board {
+    padding: .5rem;
 }
