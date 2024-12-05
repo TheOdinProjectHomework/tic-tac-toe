@@ -2,6 +2,8 @@ let gameboardDiv = document.getElementById("gameboard");
 let winnerMsg = document.getElementById("winner-ad");
 let tryAgainBtn = document.getElementById("tryAgainBtn");
 let turnMsg = document.getElementById("turn-paragraph");
+let player1Score = document.getElementById("player1Score");
+let player2Score = document.getElementById("player2Score");
 
 // let playerX = "X";
 let playerX = {
@@ -47,8 +49,9 @@ const gameEssentials = (function() {
                     cell.innerText = selectCell(i, currentPlayer);
                     if (checkWinner(currentPlayer, cells)){
                         console.log("Winner: " + currentPlayer);
-                        // winnerMsg.textContent = "Winner: " + currentPlayer.sign;
                         turnMsg.innerText = "Winner: " + currentPlayer.sign;
+                        displayScore(playerX, playerO);
+                        board.style.pointerEvents = "none";
                     } else {
                         if(currentPlayer === playerX ? currentPlayer = playerO : currentPlayer = playerX);
                         turnMsg.innerText = "Player's turn: " + currentPlayer.sign;
@@ -67,12 +70,19 @@ const gameEssentials = (function() {
                 cells[b].innerText === currentPlayer.sign && 
                 cells[c].innerText === currentPlayer.sign) {
                 console.log("win: ", currentPlayer.sign);
+                currentPlayer.score = currentPlayer.score + 1;
                 return true;
             }
         }
     };
+    const displayScore = (player1, player2) => {
+        player1Score.textContent = player1.score;
+        player2Score.textContent = player2.score;
+
+    };
     const startGame = (player1, player2) => {
         displayBoard(player1, player2);
+        displayScore(player1, player2);
     };
     const tryAgain = () => {
         gameboardDiv.innerText = "";
@@ -93,39 +103,3 @@ tryAgainBtn.addEventListener('click', () => {
 });
 
 gameEssentials.startGame(playerX, playerO);
-
-// function createUser(name) {
-//     const discordName = "@" + name;
-
-//     let reputation = 0;
-//     const getReputation = () => reputation;
-//     const giveReputation = () => reputation++;
-
-//     return { name, discordName, getReputation, giveReputation };
-// }
-
-// const cris = createUser("Cris");
-// cris.giveReputation();
-
-// console.log({
-//   discordName: cris.discordName,
-//   reputation: cris.getReputation()
-// });
-
-// function createPlayer(name, level) {
-//     const { getReputation, giveReputation } = createUser(name);
-
-//     const getLevel = () => level;
-//     const increaseLevel = () => level++;
-//     return { name, getReputation, giveReputation, getLevel, increaseLevel, level };
-// }
-
-// const cristian = createPlayer("cristian", 10);
-// cristian.giveReputation();
-// cristian.increaseLevel();
-
-// console.log({
-//     name: cristian.name,
-//     reputation: cristian.getReputation(),
-//     level: cristian.getLevel(),
-// });
