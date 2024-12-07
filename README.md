@@ -8,4 +8,4 @@ A simple and interactive Tic Tac Toe game built using HTML, CSS, and Vanilla Jav
 - Reset Option: Restart the game anytime with a click.
 
 ## Demo 
-Live Demo [Tic Tac Toe](https://pages.github.com/).
+Live Demo [Tic Tac Toe](https://theodinprojecthomework.github.io/tic-tac-toe/).
